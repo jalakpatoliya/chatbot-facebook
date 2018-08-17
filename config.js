@@ -3,5 +3,5 @@ module.exports = {
     FB_VERIFY_TOKEN: 'verifytoken937',
     API_AI_CLIENT_ACCESS_TOKEN: 'c33a16ebf58c4397a657b18adc3fd532',
     FB_APP_SECRET: '3f0379e1da6a09850f3496bef582468b',
-    SERVER_URL: "https://salty-hollows-.herokuapp.com/",
+    SERVER_URL: "https://saltyhollows1995.herokuapp.com/",
 };

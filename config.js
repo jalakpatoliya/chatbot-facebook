@@ -2,6 +2,6 @@ module.exports = {
     FB_PAGE_TOKEN: 'EAAfFkxJMuQMBAJG12gEKbb3kf9j0uTzZBi60o4ckMDooAU7djm5KCjfPwDAfusc7j6ZCUSBThXfiAQbHjSYTxNKb0tuNIBHCIzyUZAHzVMftJ7Tbn7sjSZB2tduhtJZCWtyqwZBg9VNtL6ViwVXTGZB7ZCAZA4aZColGHBJPLZBosNY7QZDZD',
     FB_VERIFY_TOKEN: 'verifytoken937',
     API_AI_CLIENT_ACCESS_TOKEN: 'c33a16ebf58c4397a657b18adc3fd532',
-    FB_APP_SECRET: '',
+    FB_APP_SECRET: '3f0379e1da6a09850f3496bef582468b',
     SERVER_URL: "https://salty-hollows-.herokuapp.com/",
 };

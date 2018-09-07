@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 const uuid = require('uuid');
-var nodemailer = require("nodemailer");
+
 
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -899,37 +899,7 @@ function verifyRequestSignature(req, res, buf) {
 }
 
 function sendEmail(subject,content) {
-
-	var transporter = nodemailer.createTransport({
-				service: 'gmail',
-				auth: {
-								type: 'OAuth2',
-								user: 'fygecmodasa@gmail.com',
-								clientId: '366431355006-5ut34qv0rodupqs8c4qcadge11154522.apps.googleusercontent.com',
-								clientSecret: 'cVuwdxCKN-ZtMhZ037ePd6lZ',
-								refreshToken: '1/i1zddoS6vhuOPHao1yoKcCKnMQW6UlxfF5yySwfYtBA'
-				}
-		})
-
-	let mailOptions = {
-        from: 'GEC Modasa <fygecmodasa@gmail.com>', // sender address
-        to: 'jlkptl39@gmail.com', // list of receivers
-        subject: subject, // Subject line
-        text: content, // plain text body
-        html: '<b>Hello world?</b>' // html body
-    };
-
-	transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-    });
+	
 }
 
 function isDefined(obj) {

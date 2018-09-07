@@ -899,7 +899,7 @@ function verifyRequestSignature(req, res, buf) {
 }
 
 function sendEmail(subject,content) {
-console.log("reached sendmail");
+
 // 	var transporter = nodemailer.createTransport({
 // 				service: 'gmail',
 // 				auth: {

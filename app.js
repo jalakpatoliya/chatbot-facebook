@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 const uuid = require('uuid');
-var nodemailer = require("nodemailer");
+
 
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -185,29 +185,6 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
-		case "details-application":
-			if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
-				let phone_number = (isDefined(contexts[0].parameters['phone-number'])
-				&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
-				let user_name = (isDefined(contexts[0].parameters['user-name'])
-				&& contexts[0].parameters['user-name']!='') ? contexts[0].parameters['user-name']:'';
-				let previous_job = (isDefined(contexts[0].parameters['previous-job'])
-				&& contexts[0].parameters['previous-job']!='') ? contexts[0].parameters['previous-job']:'';
-				let years_of_experience = (isDefined(contexts[0].parameters['years-of-experience'])
-				&& contexts[0].parameters['years-of-experience']!='') ? contexts[0].parameters['years-of-experience']:'';
-				let job_vacancy = (isDefined(contexts[0].parameters['job-vacancy'])
-				&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
-
-				if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
-					let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
-					'.<br> Previous job position: ' + privious_job + '.' +
-					'.<br> Years of experience: ' + years_of_experience + '.' +
-					'.<br> Phone number: ' + phone_number + '.' ;
-					sendEmail('New job application', emailContent);
-				}
-			}
-			break;
-
 		case "job-enquiry":
 				let replies = [
 					{
@@ -896,40 +873,6 @@ function verifyRequestSignature(req, res, buf) {
 			throw new Error("Couldn't validate the request signature.");
 		}
 	}
-}
-
-function sendEmail(subject,content) {
-console.log('reached in sendEmail()');
-// 	var transporter = nodemailer.createTransport({
-// 				service: 'gmail',
-// 				auth: {
-// 								type: 'OAuth2',
-// 								user: 'fygecmodasa@gmail.com',
-// 								clientId: '366431355006-5ut34qv0rodupqs8c4qcadge11154522.apps.googleusercontent.com',
-// 								clientSecret: 'cVuwdxCKN-ZtMhZ037ePd6lZ',
-// 								refreshToken: '1/i1zddoS6vhuOPHao1yoKcCKnMQW6UlxfF5yySwfYtBA'
-// 				}
-// 		})
-//
-// 	let mailOptions = {
-//         from: 'GEC Modasa <fygecmodasa@gmail.com>', // sender address
-//         to: 'jlkptl39@gmail.com', // list of receivers
-//         subject: subject, // Subject line
-//         text: content, // plain text body
-//         html: '<b>Hello world?</b>' // html body
-//     };
-//
-// 	transporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//             return console.log(error);
-//         }
-//         console.log('Message sent: %s', info.messageId);
-//         // Preview only available when sending through an Ethereal account
-//         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-//
-//         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-//         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-//     });
 }
 
 function isDefined(obj) {

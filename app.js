@@ -184,6 +184,7 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
+	var once = true;
 	switch (action) {
 				case "details-application":
 				console.log("yes its in details application");
@@ -209,24 +210,28 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 			}
 
 		case "job-enquiry":
-				let replies = [
-					{
-						"content_type":"text",
-						"title":"Accountant",
-						"payload":"Accountant"
-					},
-					{
-						"content_type":"text",
-						"title":"Sales",
-						"payload":"Sales"
-					},
-					{
-						"content_type":"text",
-						"title":"Not interested",
-						"payload":"Not interested"
-					}
-				];
-				sendQuickReply(sender,responseText,replies);
+				if (once) {
+					let replies = [
+						{
+							"content_type":"text",
+							"title":"Accountant",
+							"payload":"Accountant"
+						},
+						{
+							"content_type":"text",
+							"title":"Sales",
+							"payload":"Sales"
+						},
+						{
+							"content_type":"text",
+							"title":"Not interested",
+							"payload":"Not interested"
+						}
+					];
+					sendQuickReply(sender,responseText,replies);
+				}
+				once = false;
+
 			break;
 		default:
 			//unhandled action, just send back the text

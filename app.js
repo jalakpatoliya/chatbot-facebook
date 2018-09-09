@@ -897,6 +897,10 @@ function verifyRequestSignature(req, res, buf) {
 	}
 }
 
+function sendEmail(subject,content) {
+
+}
+
 function isDefined(obj) {
 	if (typeof obj == 'undefined') {
 		return false;

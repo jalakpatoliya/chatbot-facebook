@@ -9,6 +9,7 @@ const request = require('request');
 const app = express();
 const uuid = require('uuid');
 
+var once = true;
 
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -184,7 +185,6 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
-	var once = true;
 	switch (action) {
 				case "details-application":
 				console.log("yes its in details application");

@@ -185,6 +185,7 @@ function handleEcho(messageId, appId, metadata) {
 }
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
+		console.log(responseText);
 	switch (action) {
 				case "details-application":
 				console.log("yes its in details application");

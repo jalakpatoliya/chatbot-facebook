@@ -185,28 +185,28 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
-			// 	case "details-application":
-			// 	console.log("yes its in details application");
-			// if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
-			// 	let phone_number = (isDefined(contexts[0].parameters['phone-number'])
-			// 	&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
-			// 	let user_name = (isDefined(contexts[0].parameters['user-name'])
-			// 	&& contexts[0].parameters['user-name']!='') ? contexts[0].parameters['user-name']:'';
-			// 	let previous_job = (isDefined(contexts[0].parameters['previous-job'])
-			// 	&& contexts[0].parameters['previous-job']!='') ? contexts[0].parameters['previous-job']:'';
-			// 	let years_of_experience = (isDefined(contexts[0].parameters['years-of-experience'])
-			// 	&& contexts[0].parameters['years-of-experience']!='') ? contexts[0].parameters['years-of-experience']:'';
-			// 	let job_vacancy = (isDefined(contexts[0].parameters['job-vacancy'])
-			// 	&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
-			// 	if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
-			// 		let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
-			// 		'.<br> Previous job position: ' + privious_job + '.' +
-			// 		'.<br> Years of experience: ' + years_of_experience + '.' +
-			// 		'.<br> Phone number: ' + phone_number + '.' ;
-			// 		sendEmail('New job application', emailContent);
-			// 	}
-			// }
-			// break;
+				case "details-application":
+				console.log("yes its in details application");
+			if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
+				let phone_number = (isDefined(contexts[0].parameters['phone-number'])
+				&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
+				let user_name = (isDefined(contexts[0].parameters['user-name'])
+				&& contexts[0].parameters['user-name']!='') ? contexts[0].parameters['user-name']:'';
+				let previous_job = (isDefined(contexts[0].parameters['previous-job'])
+				&& contexts[0].parameters['previous-job']!='') ? contexts[0].parameters['previous-job']:'';
+				let years_of_experience = (isDefined(contexts[0].parameters['years-of-experience'])
+				&& contexts[0].parameters['years-of-experience']!='') ? contexts[0].parameters['years-of-experience']:'';
+				let job_vacancy = (isDefined(contexts[0].parameters['job-vacancy'])
+				&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
+				if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
+					let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
+					'.<br> Previous job position: ' + privious_job + '.' +
+					'.<br> Years of experience: ' + years_of_experience + '.' +
+					'.<br> Phone number: ' + phone_number + '.' ;
+					sendEmail('New job application', emailContent);
+				}
+				break;
+			}
 
 		case "job-enquiry":
 				let replies = [

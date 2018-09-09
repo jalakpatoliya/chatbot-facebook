@@ -185,8 +185,8 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
-			// 	case "details-application":
-			// 	console.log("yes its in details application");
+				case "details-application":
+				console.log("yes its in details application");
 			// // if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
 			// // 	let phone_number = (isDefined(contexts[0].parameters['phone-number'])
 			// // 	&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
@@ -206,7 +206,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 			// // 		sendEmail('New job application', emailContent);
 			// // 	}
 			// // }
-			// break;
+			break;
 
 		case "job-enquiry":
 				let replies = [

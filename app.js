@@ -938,7 +938,9 @@ function sendEmail(sub,content) {
 	transporter.sendMail(mailOptions, function(error, info) {
 		if(error) {
 			console.log(error)
-		} 
+		} else {
+			console.log("mail sent successfully, may b :)");
+		}
 	});
 }
 // Spin up the server

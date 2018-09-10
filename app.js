@@ -208,6 +208,8 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 					sendEmail('New job application', emailContent);
 				}
 			}
+			sendTextMessage(sender,responseText);
+			break;
 
 		case "job-enquiry":
 				if (once) {

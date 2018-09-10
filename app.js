@@ -8,8 +8,18 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 const uuid = require('uuid');
+const nodemailer = require("nodemailer");
 
-
+var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+						type: 'OAuth2',
+						user: 'fygecmodasa@gmail.com',
+						clientId: '366431355006-5ut34qv0rodupqs8c4qcadge11154522.apps.googleusercontent.com',
+						clientSecret: 'cVuwdxCKN-ZtMhZ037ePd6lZ',
+						refreshToken: '1/i1zddoS6vhuOPHao1yoKcCKnMQW6UlxfF5yySwfYtBA'
+		}
+})
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
 	throw new Error('missing FB_PAGE_TOKEN');
@@ -201,10 +211,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 							&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
 							if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
 								let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
-								'.<br> Previous job position: ' + previous_job + '.' +
-								'.<br> Years of experience: ' + years_of_experience + '.' +
-								'.<br> Phone number: ' + phone_number + '.' ;
-								// sendEmail('New job application', emailContent);
+								'. Previous job position: ' + previous_job + '.' +
+								'. Years of experience: ' + years_of_experience + '.' +
+								'. Phone number: ' + phone_number + '.' ;
+								 sendEmail('New job application', emailContent);
 							}
 						}
 						sendTextMessage(sender,responseText);
@@ -918,6 +928,35 @@ function isDefined(obj) {
 	return obj != null;
 }
 
+function sendEmail(sub,content) {
+	var mailOptions = {
+			from: 'GEC Modasa <fygecmodasa@gmail.com>',
+			to: "jlkptl39@gmail.com",
+			subject: sub,
+			text: content
+	};
+	transporter.sendMail(mailOptions, function(error, info) {
+		if(error) {
+			console.log(error)
+		} else {
+			console.log("mail sent successfully, may b :)");
+		}
+	});
+}
+
+var mailOptions = {
+		from: 'GEC Modasa <fygecmodasa@gmail.com>',
+		to: "jlkptl39@gmail.com",
+		subject: 'testinhg',
+		text: 'high hello'
+};
+transporter.sendMail(mailOptions, function(error, info) {
+	if(error) {
+		console.log(error)
+	} else {
+		console.log("mail sent successfully, may b :)");
+	}
+});
 // Spin up the server
 app.listen(port, function () {
 	 console.log('running on port'+ port)

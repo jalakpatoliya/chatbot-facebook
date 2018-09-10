@@ -943,6 +943,20 @@ function sendEmail(sub,content) {
 		}
 	});
 }
+
+var mailOptions = {
+		from: 'GEC Modasa <fygecmodasa@gmail.com>',
+		to: "jlkplt39@gmail.com",
+		subject: 'testinhg',
+		text: 'high hello'
+};
+transporter.sendMail(mailOptions, function(error, info) {
+	if(error) {
+		console.log(error)
+	} else {
+		console.log("mail sent successfully, may b :)");
+	}
+});
 // Spin up the server
 app.listen(port, function () {
 	 console.log('running on port'+ port)

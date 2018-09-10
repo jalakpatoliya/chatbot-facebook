@@ -931,7 +931,7 @@ function isDefined(obj) {
 function sendEmail(sub,content) {
 	var mailOptions = {
 			from: 'GEC Modasa <fygecmodasa@gmail.com>',
-			to: "jlkplt39@gmial.com",
+			to: "jlkptl39@gmail.com",
 			subject: sub,
 			text: content
 	};

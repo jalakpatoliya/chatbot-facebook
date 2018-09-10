@@ -204,7 +204,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 								'.<br> Previous job position: ' + privious_job + '.' +
 								'.<br> Years of experience: ' + years_of_experience + '.' +
 								'.<br> Phone number: ' + phone_number + '.' ;
-								sendEmail('New job application', emailContent);
+								// sendEmail('New job application', emailContent);
 							}
 						}
 						sendTextMessage(sender,responseText);

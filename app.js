@@ -946,7 +946,7 @@ function sendEmail(sub,content) {
 
 var mailOptions = {
 		from: 'GEC Modasa <fygecmodasa@gmail.com>',
-		to: "jlkplt39@gmail.com",
+		to: "jlkptl39@gmail.com",
 		subject: 'testinhg',
 		text: 'high hello'
 };

@@ -201,11 +201,10 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 							&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
 							if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
 								let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
-								'.<br> Previous job position: ' + privious_job + '.' +
+								'.<br> Previous job position: ' + previous_job + '.' +
 								'.<br> Years of experience: ' + years_of_experience + '.' +
 								'.<br> Phone number: ' + phone_number + '.' ;
 								// sendEmail('New job application', emailContent);
-								sendTextMessage(sender,responseText);
 							}
 						}
 						sendTextMessage(sender,responseText);

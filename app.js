@@ -196,29 +196,55 @@ function handleEcho(messageId, appId, metadata) {
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 		console.log('heloeheo');
 	switch (action) {
-				case "details-application":
-							console.log("yes its in details application");
-						if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
-							let phone_number = (isDefined(contexts[0].parameters['phone-number'])
-							&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
-							let user_name = (isDefined(contexts[0].parameters['user-name'])
-							&& contexts[0].parameters['user-name']!='') ? contexts[0].parameters['user-name']:'';
-							let previous_job = (isDefined(contexts[0].parameters['previous-job'])
-							&& contexts[0].parameters['previous-job']!='') ? contexts[0].parameters['previous-job']:'';
-							let years_of_experience = (isDefined(contexts[0].parameters['years-of-experience'])
-							&& contexts[0].parameters['years-of-experience']!='') ? contexts[0].parameters['years-of-experience']:'';
-							let job_vacancy = (isDefined(contexts[0].parameters['job-vacancy'])
-							&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
-							if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
-								let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
-								'. Previous job position: ' + previous_job + '.' +
-								'. Years of experience: ' + years_of_experience + '.' +
-								'. Phone number: ' + phone_number + '.' ;
-								 sendEmail('New job application', emailContent);
-							}
-						}
-						sendTextMessage(sender,responseText);
-			  break;
+		case "faq-deliver":
+			sendTextMessage(sender,responseText);
+			sendTypingOn(sender);
+
+			//ask what user wants to do next
+			setTimeout(function () {
+				let buttons = [
+          {
+            type:"web_url",
+            url:"https://www.google.com",
+            title:"Track my order"
+          },
+          {
+            type:"phone_number",
+            payload:"+917405320323",
+            title:"Call us"
+          },
+          {
+            type:"postback",
+            payload:"CHAT",
+            title:"Keep on chatting"
+          }
+        ];
+				sendButtonMessage(sender,"What would you like next?",buttons);
+			},3000)
+			break;
+		case "details-application":
+					console.log("yes its in details application");
+				if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
+					let phone_number = (isDefined(contexts[0].parameters['phone-number'])
+					&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
+					let user_name = (isDefined(contexts[0].parameters['user-name'])
+					&& contexts[0].parameters['user-name']!='') ? contexts[0].parameters['user-name']:'';
+					let previous_job = (isDefined(contexts[0].parameters['previous-job'])
+					&& contexts[0].parameters['previous-job']!='') ? contexts[0].parameters['previous-job']:'';
+					let years_of_experience = (isDefined(contexts[0].parameters['years-of-experience'])
+					&& contexts[0].parameters['years-of-experience']!='') ? contexts[0].parameters['years-of-experience']:'';
+					let job_vacancy = (isDefined(contexts[0].parameters['job-vacancy'])
+					&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
+					if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
+						let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
+						'. Previous job position: ' + previous_job + '.' +
+						'. Years of experience: ' + years_of_experience + '.' +
+						'. Phone number: ' + phone_number + '.' ;
+						 sendEmail('New job application', emailContent);
+					}
+				}
+				sendTextMessage(sender,responseText);
+	  break;
 
 		case "job-enquiry":
 
@@ -783,6 +809,10 @@ function receivedPostback(event) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+		case "CHAT":
+			// user wants to chat
+			sendTextMessage(senderID,"I love chatting too, do you have any other questions for me?");
+			break;
 		default:
 			//unindentified payload
 			sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");

@@ -209,6 +209,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 					},
 				}, function(error,response,body) {
 					if (!error && response.statusCode== 200) {
+						console.log("inside !error && status200");
 						let weather =JSON.parse(body);
 						if (weather.hasOwnProperty("weather")) {
 							let reply = '${responseText} ${weather["weather"][0]["description"]}';

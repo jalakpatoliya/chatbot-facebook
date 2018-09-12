@@ -201,6 +201,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
 		case "get-current-weather":
 			if (parameters.hasOwnProperty("geo-city")&&parameters["geo-city"]!='') {
+				console.log('::::::::::',parameters["geo-city"]);
 				request({
 					url:'https://samples.openweathermap.org/data/2.5/weather',
 					qs :{

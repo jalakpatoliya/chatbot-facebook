@@ -203,7 +203,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 			if (parameters.hasOwnProperty("geo-city")&&parameters["geo-city"]!='') {
 				console.log('::::::::::',parameters["geo-city"]);
 				request({
-					url:'https://samples.openweathermap.org/data/2.5/weather',
+					url:'https://api.openweathermap.org/data/2.5/weather',
 					qs :{
 						appid:config.WEATHER_API_KEY,
 						q:parameters['geo-city']

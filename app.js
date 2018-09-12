@@ -809,6 +809,10 @@ function receivedPostback(event) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+		case "JOB_APPLY":
+			//get feedback with new jobs
+			sendToApiAi(senderID,"job openings");
+			break;
 		case "CHAT":
 			// user wants to chat
 			sendTextMessage(senderID,"I love chatting too, do you have any other questions for me?");
@@ -991,3 +995,62 @@ transporter.sendMail(mailOptions, function(error, info) {
 app.listen(port, function () {
 	 console.log('running on port'+ port)
 })
+
+
+// To set ::::::greeting:::::: for the first time user::::::  run this on gitbash
+// curl -X POST -H "Content-Type: application/json" -d '{
+// "greeting":[
+// {
+// "locale":"default",
+// "text":"Hi, SmartyBot at your service!"
+// }, {
+// "locale":"en_US",
+// "text":"Hi, SmartyBot at your service!"
+// }
+// ]
+//
+// }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAfFkxJMuQMBAJG12gEKbb3kf9j0uTzZBi60o4ckMDooAU7djm5KCjfPwDAfusc7j6ZCUSBThXfiAQbHjSYTxNKb0tuNIBHCIzyUZAHzVMftJ7Tbn7sjSZB2tduhtJZCWtyqwZBg9VNtL6ViwVXTGZB7ZCAZA4aZColGHBJPLZBosNY7QZDZD"
+//
+
+// To set get started button, run this on gitbash
+// curl -X POST -H "Content-Type: application/json" -d '{
+//   "get_started":{
+//     "payload":"GET_STARTED"
+//   }
+//
+// }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAfFkxJMuQMBAJG12gEKbb3kf9j0uTzZBi60o4ckMDooAU7djm5KCjfPwDAfusc7j6ZCUSBThXfiAQbHjSYTxNKb0tuNIBHCIzyUZAHzVMftJ7Tbn7sjSZB2tduhtJZCWtyqwZBg9VNtL6ViwVXTGZB7ZCAZA4aZColGHBJPLZBosNY7QZDZD"
+
+
+// To set buttons options in message
+// curl -X POST -H "Content-Type: application/json" -d '{
+// "persistent_menu":[
+//   {
+//     "locale":"default",
+//     "composer_input_disabled": false, //true if want to disable typing of user
+//     "call_to_actions":[
+//       {
+//         "title":"Contact",
+//         "type":"nested",
+//         "call_to_actions":[
+//           {
+//             "title":"View website",
+//             "type":"web_url",
+//             "url":"https://testing-firebase-3b5fd.firebaseapp.com/"
+//           },
+//           {
+//             "title":"Apply for a job",
+//             "type":"postback",
+//             "payload":"JOB_APPLY"
+//           }
+//         ]
+//       },
+//       {
+//         "type":"postback",
+//         "title":"Start here",
+//         "payload":"GET_STARTED"
+//       }
+//     ]
+//   }
+// ]
+//
+// }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAfFkxJMuQMBAJG12gEKbb3kf9j0uTzZBi60o4ckMDooAU7djm5KCjfPwDAfusc7j6ZCUSBThXfiAQbHjSYTxNKb0tuNIBHCIzyUZAHzVMftJ7Tbn7sjSZB2tduhtJZCWtyqwZBg9VNtL6ViwVXTGZB7ZCAZA4aZColGHBJPLZBosNY7QZDZD"

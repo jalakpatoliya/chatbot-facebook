@@ -36,6 +36,9 @@ if (!config.FB_APP_SECRET) {
 if (!config.SERVER_URL) { //used for ink to static files
 	throw new Error('missing SERVER_URL');
 }
+if (!config.WEATHER_API_KEY) { //weather api key
+	throw new Error('missing WEATHER_API_KEY');
+}
 
 
 var   port       = process.env.PORT || 8080;
@@ -196,6 +199,32 @@ function handleEcho(messageId, appId, metadata) {
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 		console.log('heloeheo');
 	switch (action) {
+		case "get-current-weather":
+			if (parameters.hasOwnProperty("geo-city")&&parameters["geo-city"]!='') {
+				request({
+					url:'https://samples.openweathermap.org/data/2.5/weather',
+					qs :{
+						appid:config.WEATHER_API_KEY,
+						q:parameters['geo-city']
+					},
+				}, function(error,response,body) {
+					if (!error && response.statusCode== 200) {
+						let weather =JSON.parse(body);
+						if (weather.hasOwnProperty("weater")) {
+							let reply = '${responseText} ${weather["weather"][0]["description"]}';
+							sendTextMessage(sender,reply);
+						}else{
+							sendTextMessage(sender,'No weather forecast available for ${parameters["geo-city"]}');
+						}
+					} else {
+						console.log(response.error);
+					}
+				}
+			);
+			} else {
+				sendTextMessage(sender,responseText);
+			}
+			break;
 		case "faq-deliver":
 			sendTextMessage(sender,responseText);
 			sendTypingOn(sender);

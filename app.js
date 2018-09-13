@@ -255,9 +255,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 				sendButtonMessage(sender,"What would you like next?",buttons);
 			},3000)
 			break;
+
 		case "details-application":
 					console.log("yes its in details application");
-				if (isDefined(contexts[0]) && contexts[0].name=='job_application' && contexts[0].parameters) {
+				if (isDefined(contexts[0]) &&
+				  (contexts[0].name=='job_application' || contexts[0].name=='job-application-detailes_dialog_context')
+				  && contexts[0].parameters) {
 					let phone_number = (isDefined(contexts[0].parameters['phone-number'])
 					&& contexts[0].parameters['phone-number']!='') ? contexts[0].parameters['phone-number']:'';
 					let user_name = (isDefined(contexts[0].parameters['user-name'])
@@ -268,15 +271,36 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 					&& contexts[0].parameters['years-of-experience']!='') ? contexts[0].parameters['years-of-experience']:'';
 					let job_vacancy = (isDefined(contexts[0].parameters['job-vacancy'])
 					&& contexts[0].parameters['job-vacancy']!='') ? contexts[0].parameters['job-vacancy']:'';
-					if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
+					if (phone_number==''&& user_name!=''&& previous_job!='' && years_of_experience=='') {
+						let replies = [
+							{
+								"content_type":"text",
+								"title":"Less than one year",
+								"payload":"Less than one year"
+							},
+							{
+								"content_type":"text",
+								"title":"Less than ten years",
+								"payload":"Less than ten years"
+							},
+							{
+								"content_type":"text",
+								"title":"More than ten years",
+								"payload":"More than ten years"
+							}
+						];
+						sendQuickReply(sender,responseText,replies);
+					} else if (phone_number!=''&& user_name!=''&& previous_job!='' && years_of_experience!=''&& job_vacancy!='') {
 						let emailContent = 'A new job enquiry from ' + user_name +' for the job:' + job_vacancy +
 						'. Previous job position: ' + previous_job + '.' +
 						'. Years of experience: ' + years_of_experience + '.' +
 						'. Phone number: ' + phone_number + '.' ;
 						 sendEmail('New job application', emailContent);
+						 sendTextMessage(sender,responseText);
+					} else {
+						sendTextMessage(sender,responseText);
 					}
 				}
-				sendTextMessage(sender,responseText);
 	  break;
 
 		case "job-enquiry":
